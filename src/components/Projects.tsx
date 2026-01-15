@@ -1,108 +1,137 @@
 import { ExternalLink, Github } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { projects } from "@/data/projects";
 import { Button } from "./ui/button";
-
-const projects = [
-  {
-    number: "01",
-    title: "PhotoMentorAI",
-    description: "A real-time AI photography assistant that analyzes live camera frames using computer vision and deep-learning emotion recognition to provide instant visual and voice-based shooting guidance.",
-    tech: ["React", "FastAPI", "Python", "OpenCV", "Deep Learning", "ONNX", "Docker"],
-    highlights: [
-      "End-to-end AI inference pipelines with ONNX-optimized FER+ model",
-      "Low-latency emotion detection and multi-face analysis",
-      "MLOps practices with Docker containerization"
-    ]
-  },
-  {
-    number: "02",
-    title: "SafeLink AI",
-    description: "A full-stack AI-powered health assistant enabling real-time symptom analysis, AI chat support, and nearby hospital discovery with intelligent fallback systems.",
-    tech: ["React", "FastAPI", "Python", "Groq API", "Ollama", "CI/CD"],
-    highlights: [
-      "LLM integration with Groq API and Ollama fallback",
-      "Rule-based medical logic for risk assessment",
-      "Production deployment with CI/CD pipelines"
-    ]
-  },
-  {
-    number: "03",
-    title: "Fake Job Posting Detector",
-    description: "An AI-powered detection system using NLP and machine learning to classify job postings as real or fraudulent with probability-based risk scores.",
-    tech: ["Python", "NLP", "TF-IDF", "Logistic Regression", "FastAPI", "Next.js"],
-    highlights: [
-      "ML models using TF-IDF feature extraction",
-      "Scalable FastAPI backend with external API integration",
-      "Full-stack deployment on Render and Vercel"
-    ]
-  },
-];
+import { Reveal, Stagger, StaggerItem } from "./Motion";
 
 const Projects = () => {
+  const navigate = useNavigate();
+
   return (
-    <section id="projects" className="py-24 bg-dotted">
+    <section id="projects" className="py-24 bg-black">
       <div className="container mx-auto px-6">
-        <div className="mb-16 opacity-0 animate-fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">
-            Featured <span className="text-gradient">Projects</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            AI-powered solutions built with cutting-edge technologies
-          </p>
-        </div>
+        <div className="mx-auto max-w-6xl">
+          <Reveal className="mb-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-2">
+              Featured <span className="text-gradient">Projects</span>
+            </h2>
+            <p className="text-muted-foreground text-sm md:text-base">
+              AI-powered solutions built with cutting-edge technologies
+            </p>
+          </Reveal>
 
-        <div className="space-y-16">
-          {projects.map((project, index) => (
-            <div
-              key={project.number}
-              className={`grid lg:grid-cols-2 gap-8 items-center opacity-0 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
-            >
-              {/* Project Card */}
-              <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="bg-card-gradient rounded-2xl border border-border p-8 hover-lift">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-5xl font-heading font-bold text-primary/30">{project.number}</span>
-                    <h3 className="text-2xl md:text-3xl font-heading font-bold">{project.title}</h3>
+          <div className="relative">
+            <Stagger className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible">
+              {projects.map((project, index) => (
+                <StaggerItem
+                  key={project.id}
+                  className={`group snap-start min-w-[280px] sm:min-w-[340px] md:min-w-0 cursor-pointer rounded-2xl border border-white/10 bg-[#121826] p-5 md:p-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60`}
+                >
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => navigate(`/project-details#${project.id}`)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") navigate(`/project-details#${project.id}`);
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <div className="text-xs font-semibold tracking-wide text-primary/80">
+                          Project #{String(index + 1).padStart(2, "0")}
+                        </div>
+                        <h3 className="mt-1 text-lg md:text-xl font-heading font-bold transition-colors duration-300 group-hover:text-primary">
+                          {project.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                          {project.subtitle}
+                        </p>
+                      </div>
+
+                      <div className="hidden md:flex items-center gap-2">
+                        {project.githubUrl ? (
+                          <Button
+                            asChild
+                            variant="outline"
+                            size="icon"
+                            aria-label="GitHub"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                              <Github />
+                            </a>
+                          </Button>
+                        ) : (
+                          <Button variant="outline" size="icon" aria-label="GitHub" disabled onClick={(e) => e.stopPropagation()}>
+                            <Github />
+                          </Button>
+                        )}
+                        {project.demoUrl ? (
+                          <Button
+                            asChild
+                            variant="outline"
+                            size="icon"
+                            aria-label="Live demo"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <a href={project.demoUrl} target="_blank" rel="noreferrer">
+                              <ExternalLink />
+                            </a>
+                          </Button>
+                        ) : (
+                          <Button variant="outline" size="icon" aria-label="Live demo" disabled onClick={(e) => e.stopPropagation()}>
+                            <ExternalLink />
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-4 aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/20">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} screenshot`}
+                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
+                        }}
+                      />
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tech.slice(0, 5).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-200 transition-colors duration-300 group-hover:border-primary/30"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-5 flex items-center justify-between gap-3">
+                      <div className="text-xs text-muted-foreground">Click card for details</div>
+
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="hero"
+                          size="sm"
+                          className="transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/project-details#${project.id}`);
+                          }}
+                        >
+                          View Details
+                          <ExternalLink />
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Highlights */}
-                  <ul className="space-y-2">
-                    {project.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">→</span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Visual Placeholder */}
-              <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 border border-border flex items-center justify-center hover-lift">
-                  <div className="text-center">
-                    <span className="text-6xl font-heading font-bold text-primary/20">{project.number}</span>
-                    <p className="text-muted-foreground text-sm mt-2">{project.title}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
         </div>
       </div>
     </section>

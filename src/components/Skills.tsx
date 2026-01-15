@@ -1,3 +1,5 @@
+import { Reveal, Stagger, StaggerItem } from "./Motion";
+
 const skillCategories = [
   {
     title: "Languages",
@@ -9,7 +11,7 @@ const skillCategories = [
   },
   {
     title: "AI/ML Tools",
-    skills: ["NLP", "TF-IDF", "Logistic Regression", "BERT", "SBERT", "Deep Learning", "Computer Vision", "FER+"],
+    skills: ["NLP", "TF-IDF", "Logistic Regression", "BERT", "SBERT", "LLMs", "RAG", "Hugging Face", "PyTorch", "Deep Learning", "Computer Vision", "FER+"],
   },
   {
     title: "Developer Tools",
@@ -25,20 +27,20 @@ const Skills = () => {
   return (
     <section id="skills" className="py-24 bg-secondary/30">
       <div className="container mx-auto px-6">
-        <div className="mb-16 text-center opacity-0 animate-fade-in-up">
+        <Reveal className="mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">
             Technical <span className="text-gradient">Skills</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Technologies and tools I work with
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, index) => (
-            <div
+            <StaggerItem
               key={category.title}
-              className={`bg-card-gradient rounded-2xl border border-border p-6 hover-lift opacity-0 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+              className="bg-card-gradient rounded-2xl border border-border p-6 hover-lift"
             >
               <h3 className="text-lg font-heading font-semibold mb-4 text-primary">
                 {category.title}
@@ -53,9 +55,9 @@ const Skills = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );

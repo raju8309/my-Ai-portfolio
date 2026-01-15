@@ -1,13 +1,15 @@
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "./ui/button";
+import profileImage from "@/data/profile.png";
+import { Reveal } from "./Motion";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen bg-dotted flex items-center pt-20">
+    <section className="min-h-screen bg-black flex items-center pt-20 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-6 opacity-0 animate-fade-in-up">
+          <Reveal className="space-y-6">
             <div>
               <p className="text-muted-foreground text-lg font-medium mb-2">Hello,</p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading">
@@ -16,20 +18,13 @@ const Hero = () => {
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              I'm a 🤖 <span className="text-foreground font-medium">AI/ML Engineer</span> & Full-Stack Developer pursuing my Master's in IT at UNH. Specializing in building intelligent systems using Deep Learning, Computer Vision, and NLP.
+              I'm a <span className="text-foreground font-medium">AI Engineer</span> with <span className="text-foreground font-medium">1+ year of experience</span>, built through an internship and multiple end-to-end projects.
+              I work across <span className="text-foreground font-medium">LLMs / GenAI</span>, <span className="text-foreground font-medium">RAG</span>, <span className="text-foreground font-medium">embeddings</span>, <span className="text-foreground font-medium">fine-tuning</span>, <span className="text-foreground font-medium">classical ML</span>, <span className="text-foreground font-medium">NLP</span>, <span className="text-foreground font-medium">Deep Learning</span>, <span className="text-foreground font-medium">Computer Vision</span>, and <span className="text-foreground font-medium">MLOps</span>—from experimentation to deployment and monitoring.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              All things AI: <span className="text-primary">Deep Learning</span>. <span className="text-primary">Computer Vision</span>. <span className="text-primary">NLP</span>.
-              <br />
-              Yep, I do them all.
+              I completed my Master's in IT at the University of New Hampshire and I'm focused on building production-ready systems.
             </p>
-
-            <p className="text-muted-foreground leading-relaxed">
-              Let's build intelligent solutions that are not just functional but also inspiring. Systems that learn, adapt, and make a difference.
-            </p>
-
-            <p className="text-foreground font-medium">Keep Learning! 🚀</p>
 
             {/* Social Links */}
             <div className="flex items-center gap-4 pt-2">
@@ -42,7 +37,7 @@ const Hero = () => {
                 <Github size={22} />
               </a>
               <a
-                href="https://linkedin.com/in/raju-kotturi"
+                href="https://www.linkedin.com/in/raju-kotturi-609674304/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors p-2 hover:bg-secondary rounded-lg"
@@ -54,7 +49,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-2">
               <Button variant="hero" size="lg" asChild>
-                <a href="#resume">
+                <a href="https://drive.google.com/file/d/1P3kROh3VyHHe_5AFmG6XrHcz6VIM5Vy2/view?usp=share_link" target="_blank" rel="noreferrer">
                   <FileText size={18} />
                   Resume
                 </a>
@@ -66,28 +61,21 @@ const Hero = () => {
                 </a>
               </Button>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right Content - Profile Image */}
-          <div className="relative flex justify-center lg:justify-end opacity-0 animate-fade-in-up animation-delay-200">
-            <div className="relative">
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-primary/40 rounded-tl-3xl" />
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-primary/40 rounded-br-3xl" />
-              
-              {/* Profile image placeholder */}
-              <div className="w-72 h-96 md:w-80 md:h-[420px] rounded-2xl bg-card-gradient border border-border overflow-hidden shadow-2xl">
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/10">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 rounded-full bg-primary/20 mx-auto mb-4 flex items-center justify-center">
-                      <span className="text-5xl font-heading font-bold text-primary">RK</span>
-                    </div>
-                    <p className="text-muted-foreground text-sm">AI/ML Engineer</p>
-                  </div>
-                </div>
+          <Reveal className="relative flex justify-center lg:justify-end" delay={0.12}>
+            <div className="relative w-full max-w-[520px]">
+              <div className="relative h-[460px] md:h-[560px] w-full">
+                <img
+                  src={profileImage}
+                  alt="Raju Kotturi profile"
+                  className="absolute inset-0 h-full w-full object-cover object-center scale-[1.06] transition-transform duration-700 ease-out hover:scale-[1.12]"
+                  loading="lazy"
+                />
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

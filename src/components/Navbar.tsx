@@ -1,34 +1,47 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Resume", href: "#resume" },
-    { name: "Contact", href: "#contact" },
+    { name: "Projects", to: "/project-details" },
+    { name: "Skills", to: { pathname: "/", hash: "#skills" } },
+    { name: "Resume", href: "https://drive.google.com/file/d/1P3kROh3VyHHe_5AFmG6XrHcz6VIM5Vy2/view?usp=share_link", external: true },
+    { name: "Contact", to: { pathname: "/", hash: "#contact" } },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="font-heading text-xl font-bold text-foreground hover:text-primary transition-colors">
+          <Link to="/" className="font-heading text-xl font-bold text-foreground hover:text-primary transition-colors">
             Raju Kotturi
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm"
-              >
-                {link.name}
-              </a>
+              <span key={link.name}>
+                {"external" in link ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.to}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </span>
             ))}
           </div>
 
@@ -45,14 +58,27 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden pt-4 pb-2 animate-fade-in-up">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-3 text-muted-foreground hover:text-foreground transition-colors font-medium"
-              >
-                {link.name}
-              </a>
+              <span key={link.name}>
+                {"external" in link ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="block py-3 text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className="block py-3 text-muted-foreground hover:text-foreground transition-colors font-medium"
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </span>
             ))}
           </div>
         )}

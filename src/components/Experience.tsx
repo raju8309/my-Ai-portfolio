@@ -1,18 +1,19 @@
 import { Briefcase, GraduationCap } from "lucide-react";
+import { Reveal, Stagger, StaggerItem } from "./Motion";
 
 const Experience = () => {
   return (
     <section id="resume" className="py-24 bg-dotted">
       <div className="container mx-auto px-6">
-        <div className="mb-16 opacity-0 animate-fade-in-up">
+        <Reveal className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">
             Experience & <span className="text-gradient">Education</span>
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <Stagger className="grid lg:grid-cols-2 gap-12">
           {/* Experience */}
-          <div className="opacity-0 animate-fade-in-up animation-delay-100">
+          <StaggerItem>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-3 bg-primary/20 rounded-xl">
                 <Briefcase className="text-primary" size={24} />
@@ -54,10 +55,10 @@ const Experience = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Education */}
-          <div className="opacity-0 animate-fade-in-up animation-delay-200">
+          <StaggerItem>
             <div className="flex items-center gap-3 mb-8">
               <div className="p-3 bg-primary/20 rounded-xl">
                 <GraduationCap className="text-primary" size={24} />
@@ -82,8 +83,8 @@ const Experience = () => {
                 <span>Manchester, NH</span>
               </div>
             </div>
-          </div>
-        </div>
+          </StaggerItem>
+        </Stagger>
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ const Hero = () => {
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              I'm a <span className="text-foreground font-medium">AI Engineer</span> with <span className="text-foreground font-medium">1+ year of experience</span>, built through an internship and multiple end-to-end projects.
+              I'm a <span className="text-foreground font-medium">AI Engineer</span> with <span className="text-foreground font-medium">2+ years of experience</span>, built through an internship and multiple end-to-end projects.
               I work across <span className="text-foreground font-medium">LLMs / GenAI</span>, <span className="text-foreground font-medium">RAG</span>, <span className="text-foreground font-medium">embeddings</span>, <span className="text-foreground font-medium">fine-tuning</span>, <span className="text-foreground font-medium">classical ML</span>, <span className="text-foreground font-medium">NLP</span>, <span className="text-foreground font-medium">Deep Learning</span>, <span className="text-foreground font-medium">Computer Vision</span>, and <span className="text-foreground font-medium">MLOps</span>—from experimentation to deployment and monitoring.
             </p>
 

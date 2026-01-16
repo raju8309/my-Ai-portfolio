@@ -21,11 +21,11 @@ const Projects = () => {
           </Reveal>
 
           <div className="relative">
-            <Stagger className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible">
+            <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((project, index) => (
                 <StaggerItem
                   key={project.id}
-                  className={`group snap-start min-w-[280px] sm:min-w-[340px] md:min-w-0 cursor-pointer rounded-2xl border border-white/10 bg-[#121826] p-5 md:p-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60`}
+                  className={`group cursor-pointer rounded-2xl border border-white/10 bg-[#121826] p-5 md:p-6 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.9)] transition-transform duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60`}
                 >
                   <div
                     role="button"
